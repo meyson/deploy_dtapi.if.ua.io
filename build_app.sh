@@ -75,4 +75,4 @@ sed -i -e ${ENV_REGEXP} src/environments/environment.prod.ts
 ng build --prod
 cp -a ./dist/IF105/. ../${DIST_DIR}
 
-echo "Now you can run vagrant up and check $SERVER_IP in your browser"
+echo "Now you can run vagrant up and check $SERVER_IP in your browser..."
