@@ -1,9 +1,8 @@
-# deploy_dtapi.if.ua.io
-
+# Deploy dtapi.if.ua.io
 ```console
 # usage
 sudo chmod +x main.sh 
 main.sh --build
-vagrant up
+source config.sh && vagrant up
 main.sh --clean
 ```
