@@ -2,6 +2,7 @@
 
 # GLOBAL VARS
 DB_DAMP_URL="https://dtapi.if.ua/~yurkovskiy/dtapi_full.sql"
+DB_TABLE_URL="https://dtapi.if.ua/~yurkovskiy/IF-108/sessions.sql"
 
 install_mysql() {
   apt update
@@ -23,9 +24,19 @@ mysql_import() {
   if [[ -n "$DB_DAMP_URL" ]]; then
     wget -q $DB_DAMP_URL -O "/tmp/dtapi_full.sql"
   else
-    echo "import from dtapi_full.sql file..."
+    echo "Url not specified"
+    exit 1
   fi
+
+  if [[ -n "$DB_TABLE_URL" ]]; then
+    wget -q $DB_TABLE_URL -O "/tmp/sessions.sql"
+  else
+    echo "Url not specified"
+    exit 1
+  fi
+
   mysql $DATABASE < "/tmp/dtapi_full.sql"
+  mysql $DATABASE < "/tmp/sessions.sql"
 }
 
 main() {

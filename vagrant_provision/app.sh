@@ -56,7 +56,9 @@ deploy_app() {
   # for Koseven framework
   chmod -R a+rwx ./api/application/cache
   chmod -R a+rwx ./api/application/logs
+  chmod +x ./api/application/config/session.php
 }
+
 
 main() {
   # install and configure apache2
