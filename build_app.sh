@@ -3,6 +3,8 @@
 # check env arguments
 : "${DIST_DIR:?Need to set env variable DIST_DIR non-empty}"
 : "${DIST_DIR_BE:?Need to set env variable DIST_DIR_BE non-empty}"
+: "${LB_IP:?Need to set env variable LB_IP non-empty}"
+: "${DB_IP:?Need to set env variable DB_IP non-empty}"
 
 # build Backend
 build_backend() {
@@ -47,7 +49,7 @@ build_frontend() {
   npm install
 
   # replace address in Angular env variable with local IP
-  local env_regexp="s/https:\/\/dtapi\.if\.ua\/api/http:\/\/$SERVER_IP\/api/g"
+  local env_regexp="s/https:\/\/dtapi\.if\.ua\/api/http:\/\/$LB_IP\/api/g"
   sed -i -e "$env_regexp" src/environments/environment.ts
   sed -i -e "$env_regexp" src/environments/environment.prod.ts
 
@@ -66,7 +68,7 @@ main() {
 
   # copy new files
   cp -a "../new_files/." "$DIST_DIR/"
-  echo "Now you can run \"vagrant up\" and check $SERVER_IP in your browser..."
+  echo "Now you can run \"vagrant up\" and check $LB_IP in your browser..."
 }
 
 main "$@"

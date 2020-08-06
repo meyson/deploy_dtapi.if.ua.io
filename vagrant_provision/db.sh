@@ -35,14 +35,15 @@ mysql_import() {
     exit 1
   fi
 
-  mysql $DATABASE < "/tmp/dtapi_full.sql"
-  mysql $DATABASE < "/tmp/sessions.sql"
+  mysql "$DATABASE" < "/tmp/dtapi_full.sql"
+  mysql "$DATABASE" < "/tmp/sessions.sql"
 }
 
 main() {
   install_mysql
   mysql_import
-  mysql_create_user $DB_USER_NAME $DB_USER_PWD $DB_USER_HOST
+  mysql_create_user "$DB_USER_NAME" "$DB_USER_PWD" "$SERVER_IP_1"
+  mysql_create_user "$DB_USER_NAME" "$DB_USER_PWD" "$SERVER_IP_2"
   service mysql restart
 }
 
